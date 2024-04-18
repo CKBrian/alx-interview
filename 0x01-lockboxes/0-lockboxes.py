@@ -13,7 +13,6 @@ def canUnlockAll(boxes):
         List[Tuple[Sequence, int]]: A list of tuples where each containg an
         element from the input list and its corresponding length.
     """
-    rdef canUnlockAll(boxes):
     if not boxes:
         return False
 
