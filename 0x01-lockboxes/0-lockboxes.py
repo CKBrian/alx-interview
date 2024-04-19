@@ -16,7 +16,7 @@ def canUnlockAll(boxes):
     if not boxes:
         return False
 
-    # Initialize a set to keep track of visited boxes
+    #  a set to track visited boxes
     visited = set()
 
     # Initialize a queue with the first box
