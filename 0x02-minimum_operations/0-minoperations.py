@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Defines a method that calculates the fewest number of operations
+    Defines a method that calculates the fewest number of dperations
     needed to result in exactly n H characters in the file
 """
 
@@ -10,12 +10,17 @@ def minOperations(n: int) -> int:
     if n == 1:
         return 0
 
-    dp = [float('inf')] * (n + 1)
-    dp[1] = 0
-
-    for i in range(2, n + 1):
-        for j in range(1, i):
-            if i % j == 0:
-                dp[i] = min(dp[i], dp[j] + i // j)
-
-    return dp[n] if dp[n] != float('inf') else 0
+    nxt = 'H'
+    body = 'H'
+    dp = 0
+    while (len(body) < n):
+        if n % len(body) == 0:
+            dp += 2
+            nxt = body
+            body += body
+        else:
+            dp += 1
+            body += nxt
+    if len(body) != n:
+        return 0
+    return dp
