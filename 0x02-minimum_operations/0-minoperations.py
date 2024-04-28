@@ -16,7 +16,6 @@ def minOperations(n: int) -> int:
     for i in range(2, n + 1):
         for j in range(1, i):
             if i % j == 0:
-                print(f'value of i: {i} and j: {j}')
                 dp[i] = min(dp[i], dp[j] + i // j)
 
     return dp[n] if dp[n] != float('inf') else 0
