@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-"""Defines a module that reads stdin line by line and computes metrics"""
+"""Defines a module that reads stdin line by line and computes logs"""
 
 import sys
 import signal
 
 
 if __name__ == "__main__":
-    metrics = ""
+    logs = ""
 
     def signal_handler(sig, frame):
         """Handling keyboard interruption (CTRL + C)"""
         global matrics
-        print(metrics)
+        print(logs)
 
     def get_stats():
-        """reads stdin line by line and computes metrics"""
-        global metrics
+        """reads stdin line by line and computes logs"""
+        global logs
         lines = sys.stdin
         timer = 10
         file_size = 0
@@ -25,19 +25,22 @@ if __name__ == "__main__":
                    '405': 0, '500': 0
                 }
         status_codes = codes.copy()
-        signal.signal(signal.SIGINT, signal_handler)
-        for line in lines:
-            timer -= 1
-            file_size += int(line.split(" ")[-1])
-            code = line.split(" ")[-2]
-            code_count = status_codes.get(code) + 1
-            status_codes.update({code: code_count})
-            metrics = (f"File size: {file_size}\n" +
-                       "\n".join(f"{key}: {val}"
-                                 for key, val in status_codes.items() if val))
-            if timer == 0:
-                print(metrics)
-                timer = 10
-                metrics = ""
+        try:
+            signal.signal(signal.SIGINT, signal_handler)
+            for line in lines:
+                timer -= 1
+                file_size += int(line.split(" ")[-1])
+                code = line.split(" ")[-2]
+                code_count = status_codes.get(code) + 1
+                status_codes.update({code: code_count})
+                logs = (f"File size: {file_size}\n" +
+                        "\n".join(f"{key}: {val}"
+                                  for key, val in status_codes.items() if val))
+                if timer == 0:
+                    print(logs)
+                    timer = 10
+                    logs = ""
+        except KeyboardInterrupt:
+            print(logs)
 
     get_stats()
