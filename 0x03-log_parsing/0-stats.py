@@ -7,7 +7,7 @@ import signal
 
 if __name__ == "__main__":
 
-    def get_stats():
+    def get_stats() -> None:
         """reads stdin line by line and computes logs"""
         lines = sys.stdin
         timer = 10
@@ -23,7 +23,7 @@ if __name__ == "__main__":
                 timer -= 1
                 file_size += int(line.split(" ")[-1])
                 code = line.split(" ")[-2]
-                code_count = status_codes.get(code) + 1
+                code_count = status_codes.get(code, 0) + 1
                 status_codes.update({code: code_count})
                 logs = (f"File size: {file_size}\n" +
                         "\n".join(f"{key}: {val}"
