@@ -34,6 +34,7 @@ if __name__ == "__main__":
                     timer = 10
                     logs = ""
         except KeyboardInterrupt:
+            print(size)
             print(logs)
 
     get_stats()
