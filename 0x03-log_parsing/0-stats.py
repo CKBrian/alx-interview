@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Defines a module that reads stdin line by line and computes metrics"""
+
 import sys
 import signal
 
