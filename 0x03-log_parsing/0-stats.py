@@ -43,4 +43,5 @@ def get_stats():
 
 
 if __name__ == "__main__":
+    """reads stdin line by line and computes metrics"""
     get_stats()
