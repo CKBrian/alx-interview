@@ -18,7 +18,7 @@ def get_stats():
     """reads stdin line by line and computes metrics"""
     global metrics
     lines = sys.stdin
-    timer = 10
+    timer = 9
     file_size = 0
     codes = {
                '200': 0, '301': 0, '400': 0,
