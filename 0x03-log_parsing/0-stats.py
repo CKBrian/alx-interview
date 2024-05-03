@@ -2,8 +2,6 @@
 """Defines a module that reads stdin line by line and computes logs"""
 
 import sys
-import signal
-
 
 if __name__ == "__main__":
 
