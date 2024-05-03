@@ -38,7 +38,6 @@ def get_stats():
         if timer == 0:
             print(metrics)
             timer = 10
-            status_codes = codes.copy()
             metrics = ""
 
 
