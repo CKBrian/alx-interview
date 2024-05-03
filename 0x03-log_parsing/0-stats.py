@@ -24,8 +24,8 @@ if __name__ == "__main__":
                 file_size += int(line.split(" ")[-1])
                 code = line.split(" ")[-2]
                 status_codes[code] += 1
-                size = f"File size: {file_size:d}"
-                logs = "\n".join(f"{key}: {val}"
+                size = "File size: {:d}".format(file_size)
+                logs = "\n".join("{}: {}".format(key, val)
                                  for key, val in status_codes.items() if val)
                 if timer == 0:
                     print(size)
