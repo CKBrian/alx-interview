@@ -10,7 +10,8 @@ metrics = ""
 
 def signal_handler(sig, frame):
     """Handling keyboard interruption (CTRL + C)"""
-    print(sig, metrics)
+    global matrics
+    print(metrics)
 
 
 def get_stats():
