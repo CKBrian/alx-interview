@@ -6,16 +6,9 @@ import signal
 
 
 if __name__ == "__main__":
-    logs = ""
-
-    def signal_handler(sig, frame):
-        """Handling keyboard interruption (CTRL + C)"""
-        global matrics
-        print(logs)
 
     def get_stats():
         """reads stdin line by line and computes logs"""
-        global logs
         lines = sys.stdin
         timer = 10
         file_size = 0
@@ -26,7 +19,6 @@ if __name__ == "__main__":
                 }
         status_codes = codes.copy()
         try:
-            signal.signal(signal.SIGINT, signal_handler)
             for line in lines:
                 timer -= 1
                 file_size += int(line.split(" ")[-1])
