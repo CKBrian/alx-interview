@@ -33,7 +33,7 @@ def get_stats():
         code_count = status_codes.get(code) + 1
         status_codes.update({code: code_count})
         metrics = (f"File size: {file_size}\n" +
-                   "\n".join(f"{int(key)}: {val}"
+                   "\n".join(f"{key}: {val}"
                              for key, val in status_codes.items() if val))
         if timer == 0:
             print(metrics)
