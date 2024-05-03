@@ -25,10 +25,11 @@ if __name__ == "__main__":
                 code = line.split(" ")[-2]
                 code_count = status_codes.get(code, 0) + 1
                 status_codes.update({code: code_count})
-                logs = (f"File size: {file_size}\n" +
-                        "\n".join(f"{key}: {val}"
-                                  for key, val in status_codes.items() if val))
+                size = f"File size: {file_size}"
+                logs = "\n".join(f"{key}: {val}"
+                                 for key, val in status_codes.items() if val)
                 if timer == 0:
+                    print(size)
                     print(logs)
                     timer = 10
                     logs = ""
