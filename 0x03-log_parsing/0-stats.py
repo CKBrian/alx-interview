@@ -2,16 +2,12 @@
 """Defines a module that reads stdin line by line and computes metrics"""
 
 import sys
-import signal
 
 
 if __name__ == "__main__":
     def print_logs(file_size: int, status_codes: dict) -> None:
         """Prints the logs metrics"""
         size = "File size: {:d}".format(file_size)
-        logs = "\n".join("{}: {}".format(key, val)
-                         for key, val in status_codes.items() if val)
-        # print(size,"\n",logs)
         print(size)
         for key, val in status_codes.items():
             if val:
@@ -43,4 +39,3 @@ if __name__ == "__main__":
             print_logs(file_size, status_codes)
 
     get_stats()
-
