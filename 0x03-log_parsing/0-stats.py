@@ -25,7 +25,7 @@ if __name__ == "__main__":
                 size = "File size: {:d}".format(file_size)
                 logs = "\n".join("{}: {}".format(key, val)
                                  for key, val in status_codes.items() if val)
-                if timer == 0:
+                if timer % 10 == 0:
                     print(size)
                     print(logs)
                     timer = 10
