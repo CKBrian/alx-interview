@@ -2,7 +2,6 @@
 """Defines a module that reads stdin line by line and computes metrics"""
 
 import sys
-import signal
 
 
 def print_logs(file_size: int, status_codes: dict) -> None:
@@ -12,11 +11,6 @@ def print_logs(file_size: int, status_codes: dict) -> None:
     for key, val in status_codes.items():
         if val:
             print("{}: {}".format(key, val))
-
-
-def signal_handler(sig, frame):
-    """Handling keyboard interruption (CTRL + C)"""
-    print_logs(file_size, status_codes)
 
 
 def get_stats() -> None:
@@ -31,19 +25,18 @@ def get_stats() -> None:
             }
     status_codes = codes.copy()
     try:
-        try:
-            signal.signal(signal.SIGINT, signal_handler)
-            for line in lines:
+        for line in lines:
+            try:
                 timer -= 1
                 file_size += int(line.split(" ")[-1])
                 code = line.split(" ")[-2]
                 status_codes[code] += 1
-                if timer == 0:
-                    print_logs(file_size, status_codes)
-                    timer = 10
-            print_logs(file_size, status_codes)
-        except BaseException:
-            pass
+            except BaseException:
+                pass
+            if timer == 0:
+                print_logs(file_size, status_codes)
+                timer = 10
+        print_logs(file_size, status_codes)
     except KeyboardInterrupt:
         print_logs(file_size, status_codes)
 
