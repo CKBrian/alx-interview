@@ -33,8 +33,7 @@ if __name__ == '__main__':
                 data = line.split()
                 try:
                     status_code = data[-2]
-                    if status_code in stats:
-                        stats[status_code] += 1
+                    stats[status_code] += 1
                 except BaseException:
                     pass
                 try:
