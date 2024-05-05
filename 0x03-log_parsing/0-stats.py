@@ -31,18 +31,21 @@ def get_stats() -> None:
             }
     status_codes = codes.copy()
     try:
-        signal.signal(signal.SIGINT, signal_handler)
-        for line in lines:
-            timer -= 1
-            file_size += int(line.split(" ")[-1])
-            code = line.split(" ")[-2]
-            status_codes[code] += 1
-            if timer == 0:
-                print_logs(file_size, status_codes)
-                timer = 10
+        try:
+            signal.signal(signal.SIGINT, signal_handler)
+            for line in lines:
+                timer -= 1
+                file_size += int(line.split(" ")[-1])
+                code = line.split(" ")[-2]
+                status_codes[code] += 1
+                if timer == 0:
+                    print_logs(file_size, status_codes)
+                    timer = 10
+            print_logs(file_size, status_codes)
+        except BaseException:
+            pass
+    except KeyboardInterrupt:
         print_logs(file_size, status_codes)
-    except BaseException:
-        pass
 
 
 if __name__ == "__main__":
