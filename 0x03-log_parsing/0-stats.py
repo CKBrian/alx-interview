@@ -1,50 +1,46 @@
 #!/usr/bin/python3
-"""
-Log parsing
-"""
+"""Defines a module that reads stdin line by line and computes metrics"""
 
 import sys
+import signal
 
-if __name__ == '__main__':
 
-    def print_stats(stats: dict, file_size: int) -> None:
-        """
-        Prints statistics including file size and counts
-        of different HTTP status codes.
-        """
-        print("File size: {:d}".format(file_size))
-        for k, v in sorted(stats.items()):
-            if v:
-                print("{}: {}".format(k, v))
+if __name__ == "__main__":
+    def print_logs(file_size: int, status_codes: dict) -> None:
+        """Prints the logs metrics"""
+        size = "File size: {:d}".format(file_size)
+        logs = "\n".join("{}: {}".format(key, val)
+                         for key, val in status_codes.items() if val)
+        # print(size,"\n",logs)
+        print(size)
+        for key, val in status_codes.items():
+            if val:
+                print("{}: {}".format(key, val))
 
     def get_stats() -> None:
-        """
-        Reads stdin line by line, computes file size and
-        counts of different HTTP status codes,
-        and prints statistics every 10 lines.
-        """
-        filesize, count = 0, 0
-        codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
-        stats = {k: 0 for k in codes}
-
+        """reads stdin line by line and computes logs"""
+        lines = sys.stdin
+        timer = 10
+        file_size = 0
+        codes = {
+                   '200': 0, '301': 0, '400': 0,
+                   '401': 0, '403': 0, '404': 0,
+                   '405': 0, '500': 0
+                }
+        status_codes = codes.copy()
         try:
-            for line in sys.stdin:
-                count += 1
-                data = line.split()
-                try:
-                    status_code = data[-2]
-                    stats[status_code] += 1
-                except BaseException:
-                    pass
-                try:
-                    filesize += int(data[-1])
-                except BaseException:
-                    pass
-                if count % 10 == 0:
-                    print_stats(stats, filesize)
-            print_stats(stats, filesize)
+            for line in lines:
+                timer -= 1
+                file_size += int(line.split(" ")[-1])
+                code = line.split(" ")[-2]
+                status_codes[code] += 1
+                if timer == 0:
+                    print_logs(file_size, status_codes)
+                    timer = 10
+                    logs = ""
+            print_logs(file_size, status_codes)
         except KeyboardInterrupt:
-            print_stats(stats, filesize)
-            raise
+            print_logs(file_size, status_codes)
 
     get_stats()
+
