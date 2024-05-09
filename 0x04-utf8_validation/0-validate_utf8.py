@@ -2,7 +2,7 @@
 '''Defines a module with a UTF-8 Validation function'''
 
 
-def validUTF8(data = []: list) -> bool:
+def validUTF8(data: list) -> bool:
     '''
     determines if a given data set represents a valid UTF-8 encoding.
     Args:
