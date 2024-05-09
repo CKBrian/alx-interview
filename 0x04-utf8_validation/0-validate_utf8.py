@@ -10,21 +10,21 @@ def validUTF8(data: list) -> bool:
     Returns:
         bool: True if data is a valid UTF-8 encoding, else return False
     '''
-    num_bytes_following = 0
+    bytes_following = 0
     for byte in data:
-        if num_bytes_following > 0:
+        if bytes_following > 0:
             if byte >> 6 != 0b10:
                 return False
-            num_bytes_following -= 1
+            bytes_following -= 1
         else:
             if byte >> 7 == 0:
                 continue
             elif byte >> 5 == 0b110:
-                num_bytes_following = 1
+                bytes_following = 1
             elif byte >> 4 == 0b1110:
-                num_bytes_following = 2
+                bytes_following = 2
             elif byte >> 3 == 0b11110:
-                num_bytes_following = 3
+                bytes_following = 3
             else:
                 return False
-    return num_bytes_following == 0
+    return bytes_following == 0
