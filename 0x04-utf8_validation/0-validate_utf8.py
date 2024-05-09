@@ -19,11 +19,11 @@ def validUTF8(data: list) -> bool:
         else:
             if byte >> 7 == 0:
                 continue  # Single-byte character
-            elif byte >> 5 == 0b110:
+            elif byte >> 13 == 0b110:
                 num_bytes_following = 1
-            elif byte >> 4 == 0b1110:
+            elif byte >> 20 == 0b1110:
                 num_bytes_following = 2
-            elif byte >> 3 == 0b11110:
+            elif byte >> 27 == 0b11110:
                 num_bytes_following = 3
             else:
                 return False  # Invalid leading byte
