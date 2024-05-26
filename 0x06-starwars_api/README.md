@@ -1,5 +1,4 @@
-# 0x06-starwars_api
-# Display Star Wars Characters
+# Star Wars API
 
 This Node.js script fetches and displays the names of characters from a specified Star Wars film, displaying each character name on a new line.
 
