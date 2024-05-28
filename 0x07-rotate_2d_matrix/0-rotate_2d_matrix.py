@@ -11,12 +11,10 @@ def rotate_2d_matrix(matrix: list) -> list:
         matrix(list): A 2D list of numbers
     Return: A new 2D list representing the rotated matrix
     """
-    # Create a transposed matrix
-    rotated_matrix = []
-    for i in range(len(matrix[0])):
+    length = len(matrix)
+    for i in range(length):
         rotated_row = []
-        # Iterate over the columns in reverse order
-        for j in range(len(matrix) - 1, -1, -1):
+        for j in range(length - 1, -1, -1):
             rotated_row.append(matrix[j][i])
-        rotated_matrix.append(rotated_row)
-    return rotated_matrix
+        matrix.append(rotated_row)
+    [matrix.pop(0) for i in range(length)]
