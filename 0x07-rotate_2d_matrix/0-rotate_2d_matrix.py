@@ -15,5 +15,4 @@ def rotate_2d_matrix(matrix: list) -> list:
     matrix.reverse()
     for i in range(length):
         for j in range(i):
-            first = matrix[i][j]
-            matrix[i][j], matrix[j][i] = matrix[j][i], first
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
