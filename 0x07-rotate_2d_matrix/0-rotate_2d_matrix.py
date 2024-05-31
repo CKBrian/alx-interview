@@ -9,8 +9,8 @@ def rotate_2d_matrix(matrix):
     Return: A new 2D list representing the rotated matrix
     """
     for i in range(len(matrix)):
-        for z in range(i):
+        for z in range(i, len(matrix)):
             matrix[i][z], matrix[z][i] = matrix[z][i], matrix[i][z]
 
     for row in matrix:
-        matrix.reverse()
+        row.reverse()
