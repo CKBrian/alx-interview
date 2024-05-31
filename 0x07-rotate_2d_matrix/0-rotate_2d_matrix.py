@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 
-def rotate_2d_matrix(matrix: list) -> list:
+def rotate_2d_matrix(matrix):
     """Returns a +90 degree rotated 2D matrix.
 
     The function takes a 2D matrix as input and returns a new 2D matrix
