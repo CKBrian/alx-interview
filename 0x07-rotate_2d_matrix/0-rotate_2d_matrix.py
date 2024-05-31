@@ -7,8 +7,7 @@ def rotate_2d_matrix(matrix):
         matrix(list): A 2D list of numbers
     Return: A new 2D list representing the rotated matrix
     """
-    length = len(matrix)
     matrix.reverse()
-    for i in range(length):
+    for i in range(len(matrix)):
         for z in range(i):
             matrix[i][z], matrix[z][i] = matrix[z][i], matrix[i][z]
