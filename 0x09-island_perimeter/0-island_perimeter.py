@@ -3,10 +3,9 @@
 This module contains a function that returns
 the perimeter of the island described in grid
 '''
-from typing import List
 
 
-def island_perimeter(grid: List[List[int]]) -> int:
+def island_perimeter(grid) -> int:
     '''
     Calculates the perimeter of a land represented in a 2D matrix
 
