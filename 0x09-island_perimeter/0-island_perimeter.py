@@ -16,7 +16,7 @@ def island_perimeter(grid: List[List[int]]) -> int:
     Returns:
         int: The perimeter of the land
     '''
-    perimeter: int = 0
+    perimeter = 0
 
     def has_side(side: int) -> int:
         '''Checks if a side is present'''
@@ -25,12 +25,14 @@ def island_perimeter(grid: List[List[int]]) -> int:
     for row in range(len(grid)):
         for cell in range(len(grid[row])):
             if grid[row][cell] == 1:
-                s_up = has_side(grid[row - 1][cell] if row > 0 else 0)
-                s_down = has_side(grid[row + 1][cell]
-                                  if row < len(grid) - 1 else 0)
-                s_left = has_side(grid[row][cell - 1] if cell > 0 else 0)
-                s_right = has_side(grid[row][cell + 1]
-                                   if cell < len(grid[row]) - 1 else 0)
-                perimeter += s_up + s_down + s_left + s_right
+                s_up = (1 if row == 0 or not grid[row - 1][cell]
+                        else 0)
 
+                s_down = (1 if row == len(grid) - 1 or not grid[row + 1][cell]
+                          else 0)
+                s_left = 1 if cell == 0 or not grid[row][cell - 1] else 0
+
+                s_right = (1 if cell == len(grid[row]) - 1 or
+                           not grid[row][cell + 1] else 0)
+                perimeter += s_up + s_down + s_left + s_right
     return perimeter
