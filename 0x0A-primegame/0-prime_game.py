@@ -54,6 +54,5 @@ def isWinner(x, nums):
 
         winner = 'ben' if player == 'maria' else 'maria'
         player = winner
-        print(winner)
 
     return winner
